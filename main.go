@@ -48,7 +48,7 @@ func exec(){
 	ctx := context.TODO()
 	var s *semaphore.Weighted = semaphore.NewWeighted(concurrency)
 	var wg sync.WaitGroup
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 100000; i++ {
 		wg.Add(1)
 		go func(i int) {
 			defer wg.Done()
@@ -112,7 +112,7 @@ func doRotate(filenum int) {
 	}
 	defer file.Close()
 	//bufをファイルに書き込む
-	n, err = file.Write(buf)
+	_, err = file.Write(buf)
 	if err != nil {
 		fmt.Println("Error writing file:", err)
 		return
